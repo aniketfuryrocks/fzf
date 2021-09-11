@@ -66,9 +66,13 @@ impl<T: AsRef<str>> Fzf<T> {
         let i = self.list.len();
 
         for x in term.as_ref().chars() {
+            if x == ' '{
+                continue;
+            }
             let vec = self.index.entry(x.to_ascii_lowercase()).or_default();
             vec.insert(i);
         }
+
         self.list.push(term);
     }
 
